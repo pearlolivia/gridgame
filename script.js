@@ -1,7 +1,3 @@
-let generateCoordX = Math.floor(Math.random() * 6) + 2;
-let generateCoordY = Math.floor(Math.random() * 6) + 2;
-let objectCoords = {x: generateCoordX, y: generateCoordY};
-
 class GridSystem {
     constructor(matrix, playerX, playerY, objectX, objectY) {
         this.matrix = matrix;
@@ -142,12 +138,36 @@ class GridSystem {
 const gridMatrix = [
     [1,1,1,1,1,1,1],
     [1,0,0,0,0,0,1],
-    [1,0,0,1,1,0,1],
-    [1,0,0,0,1,0,1],
-    [1,0,0,0,1,0,1],
+    [1,0,1,1,0,0,1],
+    [1,0,1,0,0,0,1],
+    [1,0,1,1,1,0,1],
     [1,0,0,0,0,0,1],
     [1,1,1,1,1,1,1]
 ];
+
+let objectX = Math.floor(Math.random() * (gridMatrix.length -2)) + 1;
+let objectY = Math.floor(Math.random() * (gridMatrix.length -2)) + 1;
+if(gridMatrix[objectY][objectX] === 1 && gridMatrix[objectY][objectX] === 2) {
+    objectX = Math.floor(Math.random() * (gridMatrix.length -2)) + 1;
+    objectY = Math.floor(Math.random() * (gridMatrix.length -2)) + 1;
+}
+let objectCoords = {x: objectX, y: objectY};
+
+// let wallCoords = [];
+// for(let row = 0; row < gridMatrix.length; row++) {
+//     for(let col = 0; col < gridMatrix.length; col++) {
+//         if (gridMatrix[row][col] === 1 && row !== 0 && row !== 6 && col !== 0 && col !== 6) {
+//             wallCoords.push([row,col]);
+//         }
+//     }
+// }
+//
+// for(let i = 0; i < wallCoords.length; i++) {
+//     if([objectY, objectX] === wallCoords[i]) {
+//         objectX = Math.floor(Math.random() * 5) + 1;
+//         objectY = Math.floor(Math.random() * 5) + 1;
+//     }
+// }
 
 const gridSystem = new GridSystem(gridMatrix, 1, 1, objectCoords.x, objectCoords.y);
 gridSystem.render();
